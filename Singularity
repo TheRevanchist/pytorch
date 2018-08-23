@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: nvidia/cuda:9.0-cudnn7-devel
+From: nvidia/cuda:9.2-cudnn7-devel-ubuntu16.04
 
 %labels
 Maintainer Ismail Elezi
@@ -69,8 +69,37 @@ ENV CUDA_HOME /usr/local/cuda
     pip3 install --no-cache-dir --ignore-installed --upgrade $TF_BINARY_URL
 
     # Install python packages
-    pip3 install --upgrade keras tflearn numpy nibabel h5py scikit-learn pandas scipy matplotlib ipykernel jupyter
+    pip3 install --upgrade tflearn numpy nibabel h5py scikit-learn pandas scipy matplotlib ipykernel jupyter
 
+    pip3 --no-cache-dir install \
+        Pillow \
+        h5py \
+        ipykernel \
+        jupyter \
+        matplotlib \
+        numpy \
+        pandas \
+        scipy \
+        sklearn
+
+    python3 -m ipykernel.kernelspec
+    apt-get -y update 
+    apt-get -y upgrade
+
+    pip3 install tqdm  \
+                Augmentor  \
+                virtualenv
+
+    apt-get -y install python3-tk
+
+    pip3 install foolbox
+    apt-get install curl
+    pip3 install requests
+    pip3 install randomgen
+    pip3 install scikit-image
+    pip3 install opencv-python
+    
+    pip3 install adversarial-vision-challenge
     pip3 install torch torchvision
     pip3 install foolbox
     pip3 install requests
